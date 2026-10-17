@@ -3,7 +3,7 @@
 **Arduino-based vehicle detection and RFID access-control prototype**  
 Mechatronics Design Project (ME 3204)
 
-![Completed smart barrier gate prototype](media/photos/front_view.jpg)
+<img src="media/photos/front_view.jpg" alt="Completed smart barrier gate prototype" width="350">
 
 ## Watch the prototype in action
 
@@ -25,7 +25,7 @@ An integrated mechatronics prototype of a controlled-entry parking barrier. An A
 6. Allows an IR remote to trigger a manual opening sequence.
 7. Sweeps a top-mounted banner back and forth through approximately **180°**, using a 28BYJ-48 stepper motor and ULN2003 driver. Banner updates also occur during the program's custom waits.
 
-![Annotated front view](media/photos/annotated_front_view.png)
+<img src="media/photos/annotated_front_view.png" alt="Annotated front view of the barrier gate" width="350">
 
 ## Hardware
 
@@ -95,7 +95,7 @@ The housing was 3D printed. LED holes were added after fabrication because they 
 - [Annotated electronics and power layout](media/photos/annotated_electronics_view.png)
 - [Top view of assembled system](media/photos/top_view.jpg)
 
-![Rear electronics and power arrangement](media/photos/annotated_electronics_view.png)
+<img src="media/photos/annotated_electronics_view.png" alt="Rear electronics and power arrangement" width="350">
 
 ## Notes on safety and scope
 
