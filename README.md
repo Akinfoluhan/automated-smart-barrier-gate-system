@@ -7,7 +7,7 @@ Mechatronics Design Project (ME 3204)
 
 ## Watch the prototype in action
 
-[![Watch the 40-second barrier gate demonstration](media/video/demo-preview.jpg)](media/video/system_demo.mp4)
+https://github.com/user-attachments/assets/7fcebe2e-2c9f-486f-bf1e-2c16675b90ef
 
 **[Watch the demonstration video (MP4)](media/video/system_demo.mp4)** — shows the working prototype, vehicle interaction, LCD feedback, and gate operation. Click the preview to open the video in GitHub.
 
