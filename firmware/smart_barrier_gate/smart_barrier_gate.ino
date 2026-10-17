@@ -6,7 +6,7 @@
 #include <IRremote.hpp>
 #include <Stepper.h>
 
-// ---------------- PIN DEFINITIONS ----------------
+// Pins
 const int RED_LED_PIN    = 2;
 const int BUZZER_PIN     = 3;
 const int GREEN_LED_PIN  = 4;
@@ -17,60 +17,58 @@ const int RFID_RST_PIN   = 9;
 const int RFID_SS_PIN    = 10;
 const int IR_RECEIVE_PIN = A0;
 
-// ---------------- STEPPER PINS ----------------
+// Stepper motor pins
 const int STEPPER_IN1 = 8;
 const int STEPPER_IN2 = A1;
 const int STEPPER_IN3 = A2;
 const int STEPPER_IN4 = A3;
 
-// ---------------- REMOTE COMMAND ----------------
+// IR override button
 const uint8_t REMOTE_OVERRIDE_CMD = 0x44;
 
-// ---------------- OBJECTS ----------------
+// Components
 Servo gateServo;
 MFRC522 rfid(RFID_SS_PIN, RFID_RST_PIN);
-LiquidCrystal_I2C lcd(0x27, 16, 2);   // if blank, try 0x3F
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 // 28BYJ-48 stepper
 const int STEPS_PER_REVOLUTION = 2048;
 const int BANNER_HALF_SWEEP = STEPS_PER_REVOLUTION / 2;
 
-// Same pin order as your working test
+// Pin order used for the 28BYJ-48 driver
 Stepper bannerStepper(STEPS_PER_REVOLUTION, STEPPER_IN1, STEPPER_IN3, STEPPER_IN2, STEPPER_IN4);
 
-// ---------------- SETTINGS ----------------
+// Gate settings
 const int GATE_CLOSED_ANGLE = 0;
 const int GATE_OPEN_ANGLE   = 90;
 const int CAR_THRESHOLD_CM  = 15;
 
 const unsigned long OPEN_TIME_MS  = 4000;
-const unsigned long EXTRA_TIME_MS = 3000;   // change this to whatever extra open time you want
+const unsigned long EXTRA_TIME_MS = 3000;
 const unsigned long DENY_TIME_MS  = 1500;
 
-// ---------------- AUTHORIZED UIDs ----------------
-// EXAMPLE UID ONLY. Replace with the UID of your own test card before use.
-// RFID UIDs alone are not secure authentication for real access-control deployments.
+// Replace this sample UID with your test card UID before running.
+// UID matching is for this prototype, not secure access control.
 struct AuthorizedCard {
   byte uid[10];
   byte len;
 };
 
 AuthorizedCard allowedCards[] = {
-  {{0xDE, 0xAD, 0xBE, 0xEF}, 4},
-  // {{0x13, 0x29, 0xC9, 0x06}, 4}
+  {{0xDE, 0xAD, 0xBE, 0xEF}, 4}  // Sample UID
 };
 
 const int NUM_ALLOWED_CARDS = sizeof(allowedCards) / sizeof(allowedCards[0]);
 
-// ---------------- LCD MEMORY ----------------
+// Previous LCD message
 String lastLine1 = "";
 String lastLine2 = "";
 
-// ---------------- BANNER STATE ----------------
+// Banner sweep position
 long bannerPosition = 0;
 int bannerDirection = 1;
 
-// ---------------- HELPER FUNCTIONS ----------------
+// Helpers
 void updateBanner() {
   bannerStepper.step(bannerDirection);
   bannerPosition += bannerDirection;
@@ -115,7 +113,7 @@ void setOpenState() {
   digitalWrite(GREEN_LED_PIN, HIGH);
 }
 
-// ---------------- LED BLINK PATTERNS ----------------
+// LED patterns
 void blinkRed(int times, int onTime = 150, int offTime = 120) {
   digitalWrite(GREEN_LED_PIN, LOW);
   for (int i = 0; i < times; i++) {
@@ -148,7 +146,7 @@ void blinkBoth(int times, int onTime = 120, int offTime = 100) {
   }
 }
 
-// ---------------- BUZZER PATTERNS ----------------
+// Buzzer sounds
 void grantedBeep() {
   tone(BUZZER_PIN, 1200);
   smartDelay(150);
@@ -174,7 +172,7 @@ void closingBeep() {
   IrReceiver.restartTimer();
 }
 
-// ---------------- SENSOR FUNCTIONS ----------------
+// Sensors and card reader
 long readDistanceCm() {
   digitalWrite(TRIG_PIN, LOW);
   delayMicroseconds(2);
@@ -229,10 +227,7 @@ bool isAuthorized(MFRC522::Uid *uid) {
   return false;
 }
 
-// returns:
-//  1 = authorized
-// -1 = unauthorized
-//  0 = no card scanned
+// 1 = allowed, -1 = denied, 0 = no readable card
 int checkRFID() {
   if (!rfid.PICC_IsNewCardPresent()) return 0;
 
@@ -263,7 +258,7 @@ int checkRFID() {
   return 0;
 }
 
-// ---------------- ACCESS FUNCTIONS ----------------
+// Gate actions
 void grantAccess(const String &msg) {
   showLCD(msg, "");
   grantedBeep();
@@ -295,7 +290,7 @@ void denyAccess() {
   smartDelay(DENY_TIME_MS);
 }
 
-// ---------------- SETUP ----------------
+// Setup
 void setup() {
   Serial.begin(9600);
 
@@ -323,11 +318,11 @@ void setup() {
   showLCD("No Car Detected", "");
 }
 
-// ---------------- LOOP ----------------
+// Main loop
 void loop() {
   updateBanner();
 
-  // Remote override works anytime
+  // Check remote override before normal card scanning
   if (remoteOverridePressed()) {
     grantAccess("Manual Override");
     smartDelay(500);
