@@ -1,0 +1,13 @@
+# OS/editor-generated files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.tmp
+
+# SolidWorks temporary/backups (retain .SLDPRT designs)
+~$*
+*.SLDPRT.bak
+*.SLDASM.bak
+*.SLDDRW.bak
