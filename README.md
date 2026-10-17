@@ -69,7 +69,7 @@ Main sketch: [`firmware/smart_barrier_gate/smart_barrier_gate.ino`](firmware/sma
 5. Verify wiring, power supplies, and shared ground; adjust the LCD I2C address, servo angles, and car detection threshold for your physical setup.
 6. Upload the integrated sketch and test one subsystem at a time before operating the assembled prototype.
 
-> The uploaded code has been organized for publishing, and a hard-coded test-card UID has been replaced with a clearly marked placeholder. This repository package has **not** been hardware-tested or compile-verified in this environment.
+> The prototype was built and tested on physical hardware. The published firmware includes a sample RFID UID that must be replaced with an authorized card's UID before use. The published code has not been independently recompiled or retested since preparation for GitHub.
 
 ## CAD and fabrication
 
