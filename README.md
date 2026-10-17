@@ -7,10 +7,9 @@ Mechatronics Design Project (ME 3204)
 
 ## Watch the prototype in action
 
-[![Watch the 40-second barrier gate demonstration](media/video/demo-preview.jpg)](media/video/demo.mp4)
+[![Watch the 40-second barrier gate demonstration](media/video/demo-preview.jpg)](media/video/system_demo.mp4)
 
-**[Watch the demonstration video (MP4)](media/video/demo.mp4)** — shows the working prototype, vehicle interaction, LCD feedback, and gate operation. Click the preview to open the video in GitHub.
-
+**[Watch the demonstration video (MP4)](media/video/system_demo.mp4)** — shows the working prototype, vehicle interaction, LCD feedback, and gate operation. Click the preview to open the video in GitHub.
 
 An integrated mechatronics prototype of a controlled-entry parking barrier. An Arduino Uno detects an approaching vehicle using an ultrasonic sensor, prompts for an RFID card, and checks its UID against a configured allowlist. On authorization, a servo raises the gate arm; an LCD, status LEDs, and a passive buzzer provide feedback. An IR remote supports manual override, while a stepper-driven banner moves independently of the gate sequence.
 
@@ -43,19 +42,19 @@ An integrated mechatronics prototype of a controlled-entry parking barrier. An A
 
 ### Arduino wiring
 
-| Component | Pin(s) |
-| --- | --- |
-| Red LED / green LED | D2 / D4 |
-| Passive buzzer | D3 |
-| Servo signal | D5 |
-| Ultrasonic trigger / echo | D6 / D7 |
+| Component                             | Pin(s)            |
+| ------------------------------------- | ----------------- |
+| Red LED / green LED                   | D2 / D4           |
+| Passive buzzer                        | D3                |
+| Servo signal                          | D5                |
+| Ultrasonic trigger / echo             | D6 / D7           |
 | Stepper ULN2003 IN1 / IN2 / IN3 / IN4 | D8 / A1 / A2 / A3 |
-| RFID RST / SS | D9 / D10 |
-| RFID MOSI / MISO / SCK | D11 / D12 / D13 |
-| IR receiver | A0 |
-| I2C LCD SDA / SCL | A4 / A5 |
+| RFID RST / SS                         | D9 / D10          |
+| RFID MOSI / MISO / SCK                | D11 / D12 / D13   |
+| IR receiver                           | A0                |
+| I2C LCD SDA / SCL                     | A4 / A5           |
 
-See [full project report](docs/project_report.pdf) for the parts list, build procedure, and detailed pin table.
+See [full project report](docs/technical_report.pdf) for the parts list, build procedure, and detailed pin table.
 
 **Power note:** The final prototype used a separate 5 V power bank for the stepper subsystem, with its ground connected to Arduino ground. The report describes RFID supply-voltage troubleshooting; that experimental resistor-divider arrangement **should not be copied as a recommended power design**. Follow the module's rated supply specification (typically 3.3 V for RC522) and use a suitable regulated power source/level shifting as needed.
 
@@ -76,8 +75,8 @@ Main sketch: [`firmware/smart_barrier_gate/smart_barrier_gate.ino`](firmware/sma
 
 Native SolidWorks part models: [`hardware/solidworks/`](hardware/solidworks/)
 
-| Main enclosure | Upper support |
-| --- | --- |
+| Main enclosure                                  | Upper support                                     |
+| ----------------------------------------------- | ------------------------------------------------- |
 | ![Main housing CAD](media/cad/main_housing.png) | ![Upper support CAD](media/cad/upper_support.png) |
 
 The housing was 3D printed. LED holes were added after fabrication because they were missing from the initial CAD model. Only individual `.SLDPRT` parts are available here; no complete SolidWorks assembly or STL export is included.
@@ -91,7 +90,7 @@ The housing was 3D printed. LED holes were added after fabrication because they 
 
 ## Project documentation and gallery
 
-- [Complete 22-page report](docs/project_report.pdf) — build procedure, hardware, pinout, testing notes, and lessons learned
+- [Complete 22-page report](docs/technical_report.pdf) — build procedure, hardware, pinout, testing notes, and lessons learned
 - [Project poster](docs/project_poster.jpeg)
 - [Annotated electronics and power layout](media/photos/annotated_electronics_view.png)
 - [Top view of assembled system](media/photos/top_view.jpg)
